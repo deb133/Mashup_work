@@ -174,14 +174,20 @@ def get_geojson(result):
         geojson['properties'] = inspection_data
         return geojson
 
-def sort_geojson(result):
-	"""sort the results by average, and highscore"""
-
+# def sort_geojson(result):
+# 	"""sort the results by average, and highscore and total inspections"""
+# 	new_dict=json.loads(str(BeautifulSoup))
+# 	ordered_dict = OrderedDict(sorted(new_dict.items()))
+# 	yield ordered_dict(Average Score)
 	
 if __name__ == '__main__':
     total_result = {'type': 'FeatureCollection', 'features': []}
     for result in result_generator(10):
         geojson = get_geojson(result)
         total_result['features'].append(geojson)
+
     with open('my_map.json', 'w') as fh:
         json.dump(total_result, fh)
+
+    print json.dumps(total_result, sort_keys=True, indent=4, separators=(',', ': '))
+    
